@@ -1,96 +1,38 @@
 "use strict";
 
-var appRoot = document.getElementById("app");
+var visibality = false;
 
-var info = {
-	title: "Indecision App",
-	subtitle: "Put your life in the hands of a computer",
-	option: []
+var toggle = function toggle() {
+
+	visibality = !visibality;
+	runderr();
 };
 
-var formOnSubmit = function formOnSubmit(e) {
-	e.preventDefault();
-
-	var option = e.target.elements.option.value;
-
-	if (option) {
-		info.option.push(option);
-		e.target.elements.option.value = "";
-		runderForm();
-	}
-};
-
-var remove = function remove() {
-	info.option = [];
-	runderForm();
-};
-
-var pick = function pick() {
-
-	var randomNum = Math.floor(Math.random() * info.option.length);
-	var option = info.option[randomNum];
-	alert(option);
-};
-
-var runderForm = function runderForm() {
-
+var runderr = function runderr() {
 	var templete = React.createElement(
 		"div",
 		null,
 		React.createElement(
-			"h2",
+			"h1",
 			null,
-			info.title ? info.title : "anonymous"
+			"Toggle Button"
 		),
 		React.createElement(
-			"p",
-			null,
-			info.subtitle
+			"button",
+			{ onClick: toggle },
+			visibality ? "Don't click on me" : "Ohh.. hey there!"
 		),
-		React.createElement(
-			"p",
+		visibality && React.createElement(
+			"div",
 			null,
-			info.option.length > 0 ? "Here your options" : "No options"
-		),
-		React.createElement(
-			"p",
-			null,
-			info.option.length
-		),
-		React.createElement(
-			"ol",
-			null,
-			info.option.map(function (option) {
-				return React.createElement(
-					"li",
-					{ key: option },
-					option
-				);
-			})
-		),
-		React.createElement(
-			"form",
-			{ onSubmit: formOnSubmit },
-			React.createElement("input", { type: "text", name: "option" }),
 			React.createElement(
-				"button",
+				"p",
 				null,
-				"Add Option"
+				"siuuuuuuuuuuuu"
 			)
-		),
-		React.createElement(
-			"button",
-			{ onClick: remove },
-			"remove All"
-		),
-		React.createElement(
-			"button",
-			{ disabled: info.option.length === 0, onClick: pick },
-			"pick"
 		)
 	);
-
-	ReactDOM.render(templete, appRoot);
+	ReactDOM.render(templete, document.getElementById("app"));
 };
 
-runderForm();
+runderr();
