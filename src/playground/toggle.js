@@ -1,3 +1,6 @@
+//render, constructor, handleToggleVisibailtiy
+//visibility -> fales
+
 let visibality =false
 
 const toggle = () => {
