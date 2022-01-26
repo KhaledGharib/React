@@ -9,6 +9,26 @@ class IndecisionApp extends React.Component {
 		options: props.options
 	  };
 	}
+	componentDidMount(){
+		try{
+			const json = localStorage.getItem("options")
+			const options =JSON.parse(json)
+			if(options){
+				this.setState(() => ({ options }));
+			}
+		}catch(e){
+		}
+	}
+	componentDidUpdate(prevProps,prevState){
+		if(prevState.options.length !== this.state.options.length){
+			const json = JSON.stringify(this.state.options)
+			localStorage.setItem('options',json)
+		}
+	}
+	componentWillUnmount(){
+		console.log("suiiii")
+	}
+
 	handleDeleteOption(optionRemove){
 		this.setState((prevState)=>({options:prevState.options.filter((option)=>optionRemove !== option)}))
 	}
@@ -34,6 +54,7 @@ class IndecisionApp extends React.Component {
 	  }))
 
 	}
+
 	render() {
 	  
 	  const subtitle = 'Put your life in the hands of a computer';
@@ -87,6 +108,7 @@ class IndecisionApp extends React.Component {
 	return (
 		<div>
 		  <button onClick={props.handleDeleteOptions}>Remove All</button>
+		  {props.options.length === 0 && <p>Add Options To Start!!</p>}
 		  {
 			props.options.map((option) => 
 			<Option
@@ -130,6 +152,11 @@ IndecisionApp.defaultProps=
 	  const error = this.props.handleAddOption(option);
 		
 	  this.setState(()=>({error}))
+
+		if(!error){
+			e.target.elements.option.value=""
+		}
+
 	}
 	render() {
 	  return (
