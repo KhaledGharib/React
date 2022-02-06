@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 class IndecisionApp extends React.Component {
 	constructor(props) {
 	  super(props)
@@ -170,5 +171,13 @@ IndecisionApp.defaultProps=
 	  );
 	}
   }
+=======
+import React from "react";
+import ReactDOM from "react-dom";
+
+import IndecisionApp from "./components/IndecisionApp.js";
+
+
+>>>>>>> 45d288d (Add webpack to the app)
   
   ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
